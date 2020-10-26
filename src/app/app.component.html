@@ -1,0 +1,50 @@
+
+
+  <div class="container exchange">
+    <div class="d-flex justify-content-center">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary text-center">
+          <div class="panel-heading">
+            <h4 class="panel-title">Conversão de moedas</h4>
+          </div>
+          <div class="panel-body">
+            <form [formGroup]="form">
+
+              <div class="form-group center">
+                <label for="">Digite o valor:</label>
+                <input type="number" formControlName="amount" class="amount form-control" placeholder="Digite o  valor" min="1">
+              </div>
+
+
+              <div class="form-group inline-block">
+                <label for="">Converter de:</label>
+                <select class="currency-list form-control" formControlName="currencyOrigin">
+                  <option *ngFor="let currency of currencies" [value]="currency[0]">{{currency[0]}}</option>
+                </select>
+              </div>
+
+              <div class="form-group inline-block">
+                <label for="">Para:</label>
+                <select class="currency-list form-control" formControlName="currencyDestination">
+                  <option *ngFor="let currency of currencies" [value]="currency[0]">{{currency[0]}}</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" [disabled]="form.invalid" (click)="submit()">
+                Criar
+              </button>
+            </form>
+            <div class="alert mt-3" [ngClass]="success ? 'alert-success' : 'alert-danger'" role="alert" *ngIf="isLoaded">
+              <span *ngIf="success">Valor convertido: {{convertedvalue.data.convertedValue}}</span>
+              <span *ngIf="!success">Erro: {{convertedvalue.data[0].message}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<router-outlet></router-outlet>
